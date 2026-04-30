@@ -8,7 +8,7 @@
 </head>
 <body class="bg-gray-100 p-6">
     <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg">
-        <h1 class="text-2xl font-bold mb-4">HybridgeFlix</h1>
+        <h1 class="text-2xl font-bold mb-4">PeliFlix</h1>
         <form id="formularioPelicula" class="mb-6">
             <div class="mb-4">
                 <label for="titulo" class="block text-gray-700 font-bold mb-2">Título</label>
@@ -26,6 +26,10 @@
                 <label for="resena" class="block text-gray-700 font-bold mb-2">Reseña</label>
                 <textarea id="resena" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" rows="4" required></textarea>
             </div>
+            <div class="mb-4">
+                <label for="url" class="block text-gray-700 font-bold mb-2">Poster</label>
+                <input type="text" id="url" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            </div>
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Guardar</button>
         </form>
         <table class="min-w-full bg-white">
@@ -35,6 +39,7 @@
                     <th class="py-2 px-4 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Año</th>
                     <th class="py-2 px-4 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Calificación</th>
                     <th class="py-2 px-4 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Reseña</th>
+                    <th class="py-2 px-4 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600">Poster</th>
                 </tr>
             </thead>
             <tbody id="cuerpoTablaPeliculas">
@@ -52,6 +57,18 @@
             const anio = document.getElementById('anio').value;
             const calificacion = document.getElementById('calificacion').value;
             const resena = document.getElementById('resena').value;
+            const urlImagen = document.getElementById('url').value;
+
+             // Crear elemento de imagen
+            const img = document.createElement('img');
+            img.src = urlImagen;
+            img.alt = `Poster de ${titulo}`;
+            img.style.maxWidth = '80px';
+            img.style.height = 'auto';
+
+           
+
+        
 
             // Crear una nueva fila en la tabla
             const nuevaFila = document.createElement('tr');
@@ -62,10 +79,16 @@
                 <td class="py-2 px-4 border-b border-gray-300">${anio}</td>
                 <td class="py-2 px-4 border-b border-gray-300">${calificacion}</td>
                 <td class="py-2 px-4 border-b border-gray-300">${resena}</td>
+                <td class="py-2 px-4 border-b border-gray-300"></td>
             `;
 
+           const celdaPoster = nuevaFila.querySelector('td:last-child');
+            celdaPoster.appendChild(img);
+
+          
             // Añadir la nueva fila al cuerpo de la tabla
             document.getElementById('cuerpoTablaPeliculas').appendChild(nuevaFila);
+            
 
             // Limpiar el formulario
             document.getElementById('formularioPelicula').reset();
